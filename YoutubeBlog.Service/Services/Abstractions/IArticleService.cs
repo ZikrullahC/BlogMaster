@@ -1,9 +1,9 @@
-﻿using YoutubeBlog.Entity.Entities;
+﻿using YoutubeBlog.Entity.DTOs.Articles;
 
 namespace YoutubeBlog.Service.Services.Abstractions
 {
     public interface IArticleService
     {
-        Task<List<Article>> GetAllArticlesAsync();
+        Task<List<ArticleDto>> GetAllArticlesAsync();
     }
 }
