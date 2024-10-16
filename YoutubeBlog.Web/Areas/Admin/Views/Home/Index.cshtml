@@ -1,19 +1,18 @@
 ﻿@model List<Article>
 
-@{
-    ViewData["Title"] = "Home Page";
-}
-
-<h1>You are in the default area</h1>
+<h1>You are in the admin area</h1>
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-@foreach(var article in Model)
+@foreach (var article in Model)
 {
-    <h1>@article.Title</h1><br/>
-    <h3>@article.Content</h3><br />
+    <h1>@article.Title</h1>
+    <br />
+    <h3>@article.Content</h3>
+    <br />
+    <h3>@article.CreatedBy</h3>
     <br />
     <br />
 }
