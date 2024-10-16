@@ -1,13 +1,10 @@
-using Microsoft.EntityFrameworkCore;
-using YoutubeBlog.Data.Context;
 using YoutubeBlog.Data.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.LoadDataLayerExtension(builder.Configuration);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.LoadDataLayerExtension(builder.Configuration);
 
 var app = builder.Build();
 
