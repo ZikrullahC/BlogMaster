@@ -1,5 +1,5 @@
 using YoutubeBlog.Data.Extensions;
-using YoutubeBlog.Service.Services.Extensions;
+using YoutubeBlog.Service.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
