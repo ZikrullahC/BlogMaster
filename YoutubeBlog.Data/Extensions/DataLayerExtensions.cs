@@ -12,7 +12,9 @@ namespace YoutubeBlog.Data.Extensions
     {
         public static IServiceCollection LoadDataLayerExtension(this IServiceCollection services, IConfiguration config)
         {
+            //Bu metot IRepository'ye her talep geldiginde Repository sinifinin bir orneginin verilmesini saglar.
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            //Burada AppDbContext sinifina Dependency Injection uygulaniyor.
             services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;

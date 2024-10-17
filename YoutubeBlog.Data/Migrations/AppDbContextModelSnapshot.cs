@@ -53,21 +53,21 @@ namespace YoutubeBlog.Data.Migrations
                         new
                         {
                             Id = new Guid("dc7fffe4-9e29-4d4e-9986-11684c1ebcd7"),
-                            ConcurrencyStamp = "ac83993f-7fd1-4489-ab28-f2fe22393522",
+                            ConcurrencyStamp = "ab74880b-4624-480a-8c7e-62d55832edf8",
                             Name = "Superadmin",
                             NormalizedName = "SUPERADMIN"
                         },
                         new
                         {
                             Id = new Guid("acbd2027-d44c-4ad9-82a1-0663e938700c"),
-                            ConcurrencyStamp = "83e58cca-acf6-4ab7-a693-3964618b6b7c",
+                            ConcurrencyStamp = "2c03f7e9-4733-465e-8eb9-6e1cb0d49b49",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("da3fe45e-4430-4e90-8b2c-640ca8f9c067"),
-                            ConcurrencyStamp = "c7193b88-e884-4e68-9f69-e37cee93da19",
+                            ConcurrencyStamp = "eb9d7e24-3b75-4012-9076-15333cd76ae0",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -121,6 +121,9 @@ namespace YoutubeBlog.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("ImageId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -160,6 +163,8 @@ namespace YoutubeBlog.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ImageId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -175,17 +180,18 @@ namespace YoutubeBlog.Data.Migrations
                         {
                             Id = new Guid("e220b1cc-7f5b-47c7-96f4-01af756fbd9f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5af3e9c9-ac54-4a8c-8d12-997e56052e6c",
+                            ConcurrencyStamp = "6a78f234-ae45-48a6-aeb7-772fa09064bb",
                             EmailConfirmed = true,
                             FirstName = "Cem",
+                            ImageId = new Guid("642b90c3-6a72-4225-8ab6-f0c800d457b3"),
                             LastName = "Keskin",
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEITFDmBMhxT7ftJ5Pn764z1lHFzl3upWNzBKxgdlHguBZ7zpoaI4dSbQLntX8jtjpQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBqCaP+rLRw6hWkmmCa8gVzxDQvHT0U3adpx9TdldtTgAxn78PM3UTk3iNpxR8rq5Q==",
                             PhoneNumber = "+90453453543",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "98dd8431-a48e-47d7-b10b-5bc6462bdd84",
+                            SecurityStamp = "162a64aa-b10b-457e-9b9e-f3b2c4ac8ff3",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@gmail.com"
                         },
@@ -193,17 +199,18 @@ namespace YoutubeBlog.Data.Migrations
                         {
                             Id = new Guid("bc17922c-11f6-4993-8e63-e9d7255acda5"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "927c1d07-a0d4-4ccd-a713-19a98eba9d14",
+                            ConcurrencyStamp = "795c8480-7835-4d2d-b233-f34150f6d326",
                             EmailConfirmed = false,
                             FirstName = "Ali",
+                            ImageId = new Guid("8092a603-4ac8-42b6-8dd6-b4297dc37ebc"),
                             LastName = "Veli",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGsAfZCIl8UHA1Y6fim7EVVqAz5uiIZVbpc/ILDfSdSQuHQLeRbtEWw6rOrudjUxUw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDYFDkrMbRtSwjSb6hJ9FAjI/Ij4XsYIpC7WfBzHb6QDCVaP9EnCmhTMqcE2Jm8FqQ==",
                             PhoneNumber = "+90457853543",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9b1c1244-ac84-4484-94dc-90105ca5a429",
+                            SecurityStamp = "ad314fb8-0c57-4003-ba71-89587b3972d8",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });
@@ -328,7 +335,7 @@ namespace YoutubeBlog.Data.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ImageId")
+                    b.Property<Guid?>("ImageId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDeleted")
@@ -344,6 +351,9 @@ namespace YoutubeBlog.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("ViewCount")
                         .HasColumnType("int");
 
@@ -353,31 +363,35 @@ namespace YoutubeBlog.Data.Migrations
 
                     b.HasIndex("ImageId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Articles");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d9bdc6aa-1ab2-4bc2-ac08-6dd075004fc9"),
+                            Id = new Guid("f5f7b386-bac9-430d-8a2b-4bc03884d013"),
                             CategoryId = new Guid("fa44c043-fa75-43e3-b43c-159bf33861cf"),
                             Content = "ASP.NET Core, a powerful and open-source framework from Microsoft, provides a superb foundation for building efficient and scalable backends.\r\n\r\nIn this blog series, we’ll be constructing a comprehensive Courses API. This API will serve as a central hub for retrieving information about courses and their instructors, laying the groundwork for a dynamic web application.\r\n\r\nWelcome to the first blog of this exciting series! Today, we’ll dive into the essentials of ASP.NET Core and build a simple, yet functional, Course API.\r\n\r\nWhy ASP.NET Core?\r\nHere’s why ASP.NET Core is a compelling choice for crafting your backend systems:\r\n\r\nCross-platform — Develop and run your backends on Windows, Linux, or macOS.\r\nPerformance — ASP.NET Core consistently ranks among the fastest web frameworks, giving your applications an edge.\r\nFlexibility — Its modular design allows you to pick and choose the exact components you need, reducing overhead.\r\nStrong Community and Support — Backed by Microsoft and a large community, you’ll find plenty of resources and help when needed.\r\nModern Tooling — Works seamlessly with popular development tools like Visual Studio and Visual Studio Code.\r\nWhat We’ll Cover\r\nIn this blog post, we’ll guide you through the essentials of building a backend with ASP.NET Core. Get ready to dive into…\r\n\r\nSetting up your development environment\r\nCreating your first ASP.NET Core web API project\r\nImplementing basic CRUD operations (Create, Read, Update, Delete)",
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 10, 16, 17, 34, 29, 69, DateTimeKind.Local).AddTicks(6933),
+                            CreatedDate = new DateTime(2024, 10, 17, 13, 23, 48, 882, DateTimeKind.Local).AddTicks(3826),
                             ImageId = new Guid("642b90c3-6a72-4225-8ab6-f0c800d457b3"),
                             IsDeleted = false,
                             Title = "Build a Backend with ASP.NET Core — Beginner Guide",
+                            UserId = new Guid("e220b1cc-7f5b-47c7-96f4-01af756fbd9f"),
                             ViewCount = 15
                         },
                         new
                         {
-                            Id = new Guid("a877bbd4-f537-42a4-bd30-4cfe91c50889"),
+                            Id = new Guid("e5d941ef-a589-4da3-ad6b-4db91386f0df"),
                             CategoryId = new Guid("3d072495-4c20-46cf-a307-e3650f903bd3"),
                             Content = "Learn What You Can Do with Spring Boot\r\nSpring Boot offers a fast way to build applications. It looks at your classpath and at the beans you have configured, makes reasonable assumptions about what you are missing, and adds those items. With Spring Boot, you can focus more on business features and less on infrastructure.\r\n\r\nThe following examples show what Spring Boot can do for you:\r\n\r\nIs Spring MVC on the classpath? There are several specific beans you almost always need, and Spring Boot adds them automatically. A Spring MVC application also needs a servlet container, so Spring Boot automatically configures embedded Tomcat.\r\n\r\nIs Jetty on the classpath? If so, you probably do NOT want Tomcat but instead want embedded Jetty. Spring Boot handles that for you.\r\n\r\nIs Thymeleaf on the classpath? If so, there are a few beans that must always be added to your application context. Spring Boot adds them for you.\r\n\r\nThese are just a few examples of the automatic configuration Spring Boot provides. At the same time, Spring Boot does not get in your way. For example, if Thymeleaf is on your path, Spring Boot automatically adds a SpringTemplateEngine to your application context. But if you define your own SpringTemplateEngine with your own settings, Spring Boot does not add one. This leaves you in control with little effort on your part.",
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 10, 16, 17, 34, 29, 69, DateTimeKind.Local).AddTicks(6944),
+                            CreatedDate = new DateTime(2024, 10, 17, 13, 23, 48, 882, DateTimeKind.Local).AddTicks(3839),
                             ImageId = new Guid("8092a603-4ac8-42b6-8dd6-b4297dc37ebc"),
                             IsDeleted = false,
                             Title = "Building an Application with Spring Boot",
+                            UserId = new Guid("bc17922c-11f6-4993-8e63-e9d7255acda5"),
                             ViewCount = 15
                         });
                 });
@@ -423,7 +437,7 @@ namespace YoutubeBlog.Data.Migrations
                         {
                             Id = new Guid("fa44c043-fa75-43e3-b43c-159bf33861cf"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 10, 16, 17, 34, 29, 69, DateTimeKind.Local).AddTicks(8883),
+                            CreatedDate = new DateTime(2024, 10, 17, 13, 23, 48, 882, DateTimeKind.Local).AddTicks(5755),
                             IsDeleted = false,
                             Name = "Spring Boot"
                         },
@@ -431,7 +445,7 @@ namespace YoutubeBlog.Data.Migrations
                         {
                             Id = new Guid("3d072495-4c20-46cf-a307-e3650f903bd3"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 10, 16, 17, 34, 29, 69, DateTimeKind.Local).AddTicks(8901),
+                            CreatedDate = new DateTime(2024, 10, 17, 13, 23, 48, 882, DateTimeKind.Local).AddTicks(5838),
                             IsDeleted = false,
                             Name = "ASP.NET Core"
                         });
@@ -482,7 +496,7 @@ namespace YoutubeBlog.Data.Migrations
                         {
                             Id = new Guid("8092a603-4ac8-42b6-8dd6-b4297dc37ebc"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 10, 16, 17, 34, 29, 70, DateTimeKind.Local).AddTicks(504),
+                            CreatedDate = new DateTime(2024, 10, 17, 13, 23, 48, 882, DateTimeKind.Local).AddTicks(7432),
                             FileName = "images/testImage",
                             FileType = "jpg",
                             IsDeleted = false
@@ -491,7 +505,7 @@ namespace YoutubeBlog.Data.Migrations
                         {
                             Id = new Guid("642b90c3-6a72-4225-8ab6-f0c800d457b3"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 10, 16, 17, 34, 29, 70, DateTimeKind.Local).AddTicks(510),
+                            CreatedDate = new DateTime(2024, 10, 17, 13, 23, 48, 882, DateTimeKind.Local).AddTicks(7438),
                             FileName = "images/springImage",
                             FileType = "jpg",
                             IsDeleted = false
@@ -505,6 +519,17 @@ namespace YoutubeBlog.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("YoutubeBlog.Entity.Entities.AppUser", b =>
+                {
+                    b.HasOne("YoutubeBlog.Entity.Entities.Image", "Image")
+                        .WithMany("Users")
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("YoutubeBlog.Entity.Entities.AppUserClaim", b =>
@@ -559,13 +584,24 @@ namespace YoutubeBlog.Data.Migrations
 
                     b.HasOne("YoutubeBlog.Entity.Entities.Image", "Image")
                         .WithMany("Articles")
-                        .HasForeignKey("ImageId")
+                        .HasForeignKey("ImageId");
+
+                    b.HasOne("YoutubeBlog.Entity.Entities.AppUser", "User")
+                        .WithMany("Articles")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
 
                     b.Navigation("Image");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("YoutubeBlog.Entity.Entities.AppUser", b =>
+                {
+                    b.Navigation("Articles");
                 });
 
             modelBuilder.Entity("YoutubeBlog.Entity.Entities.Category", b =>
@@ -576,6 +612,8 @@ namespace YoutubeBlog.Data.Migrations
             modelBuilder.Entity("YoutubeBlog.Entity.Entities.Image", b =>
                 {
                     b.Navigation("Articles");
+
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }
