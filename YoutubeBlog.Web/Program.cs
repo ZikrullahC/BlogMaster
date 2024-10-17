@@ -1,12 +1,45 @@
+using Microsoft.AspNetCore.Identity;
+using YoutubeBlog.Data.Context;
 using YoutubeBlog.Data.Extensions;
+using YoutubeBlog.Entity.Entities;
 using YoutubeBlog.Service.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.LoadDataLayerExtension(builder.Configuration);
 builder.Services.LoadServiceLayerExtension();
+builder.Services.AddSession();
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+builder.Services.AddIdentity<AppUser, AppRole>(opt =>
+{
+    opt.Password.RequireNonAlphanumeric = false;
+    opt.Password.RequireLowercase = false;
+    opt.Password.RequireLowercase = false;
+})
+    .AddRoleManager<RoleManager<AppRole>>()
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(config =>
+{
+    // {Folder/Controller/Action}
+    config.LoginPath = "/Admin/Auth/Login";
+    config.LogoutPath = "/Admin/Auth/Logout";
+    config.Cookie = new CookieBuilder
+    {
+        Name = "YoutubeBlog",
+        HttpOnly = true,
+        SameSite = SameSiteMode.Strict,
+        SecurePolicy = CookieSecurePolicy.SameAsRequest //Always
+    };
+
+    config.SlidingExpiration = true;
+    config.ExpireTimeSpan = TimeSpan.FromDays(5);
+    config.AccessDeniedPath = new PathString("/Admin/Auth/AccessDenied");
+});
+
 
 var app = builder.Build();
 
@@ -21,8 +54,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSession();
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
