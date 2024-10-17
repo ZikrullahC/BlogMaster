@@ -25,8 +25,8 @@ builder.Services.AddIdentity<AppUser, AppRole>(opt =>
 builder.Services.ConfigureApplicationCookie(config =>
 {
     // {Folder/Controller/Action}
-    config.LoginPath = "Admin/Auth/Login";
-    config.LogoutPath = "Admin/Auth/Logout";
+    config.LoginPath = "/Admin/Auth/Login";
+    config.LogoutPath = "/Admin/Auth/Logout";
     config.Cookie = new CookieBuilder
     {
         Name = "YoutubeBlog",
@@ -37,7 +37,7 @@ builder.Services.ConfigureApplicationCookie(config =>
 
     config.SlidingExpiration = true;
     config.ExpireTimeSpan = TimeSpan.FromDays(5);
-    config.AccessDeniedPath = new PathString("Admin/Auth/AccessDenied");
+    config.AccessDeniedPath = new PathString("/Admin/Auth/AccessDenied");
 });
 
 
