@@ -6,6 +6,7 @@ namespace YoutubeBlog.Service.Services.Abstractions
     {
         Task<List<ArticleDto>> GetAllArticlesWithCategoryNonDeletedAsync();
         Task<ArticleDto> GetArticleWithCategoryNonDeletedAsync(Guid articleId);
+        Task SafeDeleteArtisticAsync(Guid articleId);
         Task UpdateArticleAsync(ArticleUpdateDto articleUpdateDto);
         Task CreateArticleAsync(ArticleAddDto articleAddDto);
     }

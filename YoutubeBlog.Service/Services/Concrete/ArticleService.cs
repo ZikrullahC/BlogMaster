@@ -60,5 +60,16 @@ namespace YoutubeBlog.Service.Services.Concrete
             await unitOfWork.GetRepository<Article>().UpdateAsync(article);
             await unitOfWork.SaveAsync();
         }
+
+        public async Task SafeDeleteArtisticAsync(Guid articleId)
+        {
+            var article = await unitOfWork.GetRepository<Article>().GetByGuidAsync(articleId);
+
+            article.IsDeleted = true;
+            article.DeletedDate = DateTime.Now;
+
+            await unitOfWork.GetRepository<Article>().UpdateAsync(article);
+            await unitOfWork.SaveAsync();
+        }
     }
 }
