@@ -6,7 +6,7 @@ namespace YoutubeBlog.Entity.Entities
     {
         public string Title { get; set; }
         public string Content { get; set; }
-        public int ViewCount { get; set; }
+        public int ViewCount { get; set; } = 0;
 
         //Id degerini EF Core otomatik olarak sinifin ismine gore ayarlar. Mesela CategoryId degeri Category sinifina aittir.
         public Guid CategoryId { get; set; }
