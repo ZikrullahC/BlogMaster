@@ -388,7 +388,10 @@
     <!-- Main JS -->
     <script src="~/sneat/assets/js/main.js"></script>
 
+
+    
     @await RenderSectionAsync("Scripts", required: false)
+    @await  Component.InvokeAsync("NToastNotify");
     <!-- Page JS -->
     <script src="~/sneat/assets/js/dashboards-analytics.js"></script>
 
