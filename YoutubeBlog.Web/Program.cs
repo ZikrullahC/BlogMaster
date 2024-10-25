@@ -26,6 +26,7 @@ builder.Services.AddIdentity<AppUser, AppRole>(opt =>
     .AddRoleManager<RoleManager<AppRole>>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.ConfigureApplicationCookie(config =>
 {
@@ -44,7 +45,6 @@ builder.Services.ConfigureApplicationCookie(config =>
     config.ExpireTimeSpan = TimeSpan.FromDays(5);
     config.AccessDeniedPath = new PathString("/Admin/Auth/AccessDenied");
 });
-
 
 var app = builder.Build();
 

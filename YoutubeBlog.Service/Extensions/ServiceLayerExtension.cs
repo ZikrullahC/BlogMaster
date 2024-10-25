@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using YoutubeBlog.Entity.Entities;
 using YoutubeBlog.Service.FluentValidations;
 using YoutubeBlog.Service.Helpers.Images;
 using YoutubeBlog.Service.Services.Abstractions;
@@ -17,6 +18,7 @@ namespace YoutubeBlog.Service.Extensions
             services.AddScoped<IArticleService, ArticleService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IImageHelper, ImageHelper>();
+            services.AddScoped<IValidator<Category>, CategoryValidator>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             

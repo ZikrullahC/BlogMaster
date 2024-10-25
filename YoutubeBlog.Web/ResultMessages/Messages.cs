@@ -18,5 +18,22 @@
                 return $"{articleTitle} article deleted successfully";
             }
         }
+
+        public static class Category
+        {
+            public static string Add(string categoryName)
+            {
+                return $"{categoryName} category added successfully";
+            }
+
+            public static string Update(string categoryName)
+            {
+                return $"{categoryName} category updated successfully";
+            }
+            public static string Delete(string categoryName)
+            {
+                return $"{categoryName} category deleted successfully";
+            }
+        }
     }
 }

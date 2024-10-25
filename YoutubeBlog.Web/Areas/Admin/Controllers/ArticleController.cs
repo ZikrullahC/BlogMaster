@@ -70,6 +70,15 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
             var articleUpdateDto = mapper.Map<ArticleUpdateDto>(article);
             articleUpdateDto.Categories = categories;
 
+            if(articleUpdateDto.Image == null)
+            {
+                Console.WriteLine("ArticleUpdateDto = Null");
+            }
+            else
+            {
+                Console.WriteLine("ArticleUpdateDto != Null");
+            }
+
             return View(articleUpdateDto);
         }
 

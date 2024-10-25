@@ -27,7 +27,12 @@
                             <label asp-for="Content">Content</label>
                             <textarea asp-for="Content" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Article Content" aria-describedby="defaultFormControlHelp" style="min-height:300px;"></textarea>
                             <span asp-validation-for="Content" class="text-danger"></span>
-                        </div>           
+                        </div>  
+                        <div class="form-group">
+                            <label asp-for="Photo">Image Upload</label>
+                            <input asp-for="Photo" accept="image/*" type="file" class="form-control mb-3" id="defaultFormControlInput"  aria-describedby="defaultFormControlHelp" >
+                            <span asp-validation-for="Photo" class="text-danger"></span>
+                        </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary" btn-block>Save</button>
                         </div>
@@ -36,3 +41,4 @@
             </div>
         </div>
     </div>
+</div>

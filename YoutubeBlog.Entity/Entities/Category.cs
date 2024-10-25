@@ -8,8 +8,9 @@ namespace YoutubeBlog.Entity.Entities
         {
             
         }
-        public Category(string name)
+        public Category(string name, string createdBy)
         {
+            CreatedBy = createdBy;
             Name = name;
         }
         public string Name { get; set; }
