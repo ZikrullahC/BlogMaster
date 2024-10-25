@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using NToastNotify;
 using YoutubeBlog.Data.Context;
 using YoutubeBlog.Data.Extensions;
 using YoutubeBlog.Entity.Entities;
@@ -10,7 +11,11 @@ builder.Services.LoadDataLayerExtension(builder.Configuration);
 builder.Services.LoadServiceLayerExtension();
 builder.Services.AddSession();
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddControllersWithViews().AddNToastNotifyToastr(new ToastrOptions()
+{
+    PositionClass = ToastPositions.TopRight,
+    TimeOut = 3000
+}).AddRazorRuntimeCompilation();
 
 builder.Services.AddIdentity<AppUser, AppRole>(opt =>
 {
@@ -21,6 +26,7 @@ builder.Services.AddIdentity<AppUser, AppRole>(opt =>
     .AddRoleManager<RoleManager<AppRole>>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.ConfigureApplicationCookie(config =>
 {
@@ -40,7 +46,6 @@ builder.Services.ConfigureApplicationCookie(config =>
     config.AccessDeniedPath = new PathString("/Admin/Auth/AccessDenied");
 });
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -51,6 +56,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseNToastNotify();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

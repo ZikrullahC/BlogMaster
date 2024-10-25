@@ -11,8 +11,9 @@
             <div class="card">
                 <h5 class="card-header">Default</h5>
                 <form asp-controller="Article" asp-action="Update" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly"></div>
                     <div class="card-body">
-                        <input type="hidden" asp-for="Id"/>
+                        <input type="hidden" asp-for="Id"/>                      
                         <div class="form-group">
                             <label asp-for="CategoryId">Category</label>
                             <select id="categoryList" class="form-control" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))"></select>
@@ -21,10 +22,23 @@
                         <div class="form-group">
                             <label asp-for="Title">Title</label>
                             <input asp-for="Title" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Article Title" aria-describedby="defaultFormControlHelp">
+                            <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Content">Content</label>
                             <textarea asp-for="Content" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Article Content" aria-describedby="defaultFormControlHelp" style="min-height:300px;"></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+
+                        <div class="card mt-3" style="width: 18rem;">
+                            <label asp-for="Image.FileName" id="defaultFormControlInput" aria-describedby="defaultFormControlHelp">Current Image</label>
+                            <img class="card-img-top" src="~/images/@Model.Image.FileName" alt="@Model.Title">  
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label asp-for="Photo">Image Upload</label>
+                            <input asp-for="Photo" accept="image/*" type="file" class="form-control mb-3" id="defaultFormControlInput" aria-describedby="defaultFormControlHelp">
+                            <span asp-validation-for="Photo" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary" btn-block>Save</button>
@@ -34,3 +48,4 @@
             </div>
         </div>
     </div>
+</div>
