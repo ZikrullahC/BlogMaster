@@ -46,7 +46,7 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
         {
             var map = mapper.Map<Article>(articleAddDto);
             var result = await validator.ValidateAsync(map);
-
+    
             if (result.IsValid)
             {
                 await articleService.CreateArticleAsync(articleAddDto);

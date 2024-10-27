@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace YoutubeBlog.Entity.DTOs.Users
+﻿namespace YoutubeBlog.Entity.DTOs.Users
 {
     public class UserLoginDto
     {

@@ -35,5 +35,22 @@
                 return $"{categoryName} category deleted successfully";
             }
         }
+
+        public static class User
+        {
+            public static string Add(string userName)
+            {
+                return $"User with email address {userName} was added successfully"; 
+            }
+
+            public static string Update(string userName)
+            {
+                return $"User with email address {userName} was updated successfully";
+            }
+            public static string Delete(string userName)
+            {
+                return $"User with email address {userName} was deleted successfully";
+            }
+        }
     }
 }

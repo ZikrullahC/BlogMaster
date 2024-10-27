@@ -47,6 +47,7 @@ namespace YoutubeBlog.Data.Mappings
             {
                 Id = Guid.Parse("E220B1CC-7F5B-47C7-96F4-01AF756FBD9F"),
                 UserName = "superadmin@gmail.com",
+                Email = "superadmin@gmail.com",
                 NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                 NormalizedUserName = "SUPERADMIN@GMAIL.COM",
                 PhoneNumber = "+90453453543",
@@ -63,6 +64,7 @@ namespace YoutubeBlog.Data.Mappings
             {
                 Id = Guid.Parse("BC17922C-11F6-4993-8E63-E9D7255ACDA5"),
                 UserName = "admin@gmail.com",
+                Email = "superadmin@gmail.com",
                 NormalizedEmail = "ADMIN@GMAIL.COM",
                 NormalizedUserName = "ADMIN@GMAIL.COM",
                 PhoneNumber = "+90457853543",

@@ -4,6 +4,5 @@ namespace YoutubeBlog.Entity.Entities
 {
     public class AppRoleClaim : IdentityRoleClaim<Guid>
     {
-
     }
 }
