@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using System.Reflection;
 using YoutubeBlog.Entity.DTOs.Categories;
 using YoutubeBlog.Entity.Entities;
 using YoutubeBlog.Service.Services.Abstractions;
+using YoutubeBlog.Web.Consts;
 using YoutubeBlog.Web.ResultMessages;
 
 namespace YoutubeBlog.Web.Areas.Admin.Controllers
@@ -27,18 +29,28 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
             this.toastNotification = toastNotification;
         }
 
+        [Authorize(Roles = $"{RoleConsts.Superadmin}, {RoleConsts.Admin}, {RoleConsts.User}")]
         public async Task<IActionResult> Index()
         {
             var categories = await categoryService.GetAllCategoriesNonDeleted();
             return View(categories);
         }
 
+        [Authorize(Roles = $"{RoleConsts.Superadmin}, {RoleConsts.Admin}")]
+        public async Task<IActionResult> DeletedCategory()
+        {
+            var categories = await categoryService.GetAllCategoriesDeleted();
+            return View(categories);
+        }
+
+        [Authorize(Roles = $"{RoleConsts.Superadmin}, {RoleConsts.Admin}")]
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
 
+        [Authorize(Roles = $"{RoleConsts.Superadmin}, {RoleConsts.Admin}")]
         [HttpPost]
         public async Task<IActionResult> Add(CategoryAddDto categoryAddDto)
         {
@@ -56,6 +68,7 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
             return View();
         }
 
+        [Authorize(Roles = $"{RoleConsts.Superadmin}, {RoleConsts.Admin}")]
         [HttpPost]
         public async Task<IActionResult> AddWithAjax([FromBody] CategoryAddDto categoryAddDto)
         {
@@ -75,6 +88,7 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
             }
         }
 
+        [Authorize(Roles = $"{RoleConsts.Superadmin}, {RoleConsts.Admin}")]
         [HttpGet]
         public async Task<IActionResult> Update(Guid categoryId)
         {
@@ -84,6 +98,7 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
             return View(map);
         }
 
+        [Authorize(Roles = $"{RoleConsts.Superadmin}, {RoleConsts.Admin}")]
         [HttpPost]
         public async Task<IActionResult> Update(CategoryUpdateDto categoryUpdateDto)
         {
@@ -101,10 +116,20 @@ namespace YoutubeBlog.Web.Areas.Admin.Controllers
             return View();
         }
 
+        [Authorize(Roles = $"{RoleConsts.Superadmin}, {RoleConsts.Admin}")]
         public async Task<IActionResult> Delete(Guid categoryId)
         {
             var name = await categoryService.SafeDeleteCategoryAsync(categoryId);
             toastNotification.AddSuccessToastMessage(Messages.Category.Delete(name), new ToastrOptions() { Title = "Delete process successfull"});
+
+            return RedirectToAction("Index", "Category", new { Area = "Admin" });
+        }
+
+        [Authorize(Roles = $"{RoleConsts.Superadmin}, {RoleConsts.Admin}")]
+        public async Task<IActionResult> UndoDelete(Guid categoryId)
+        {
+            var name = await categoryService.SafeDeleteCategoryAsync(categoryId);
+            toastNotification.AddSuccessToastMessage(Messages.Category.UndoDelete(name), new ToastrOptions() { Title = "Delete process successfull" });
 
             return RedirectToAction("Index", "Category", new { Area = "Admin" });
         }

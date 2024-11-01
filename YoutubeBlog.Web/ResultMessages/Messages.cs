@@ -17,6 +17,11 @@
             {
                 return $"{articleTitle} article deleted successfully";
             }
+
+            public static string UndoDelete(string articleTitle)
+            {
+                return $"{articleTitle} article has been successfully retrieved";
+            }
         }
 
         public static class Category
@@ -34,6 +39,11 @@
             {
                 return $"{categoryName} category deleted successfully";
             }
+
+            public static string UndoDelete(string categoryName)
+            {
+                return $"{categoryName} category has been successfully retrieved";
+            }
         }
 
         public static class User
@@ -50,6 +60,11 @@
             public static string Delete(string userName)
             {
                 return $"User with email address {userName} was deleted successfully";
+            }
+
+            public static string UndoDelete(string userName)
+            {
+                return $"The user record with the email address stored in {userName} has been restored.";
             }
         }
     }

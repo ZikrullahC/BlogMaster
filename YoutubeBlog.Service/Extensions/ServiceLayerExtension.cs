@@ -19,6 +19,8 @@ namespace YoutubeBlog.Service.Extensions
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IImageHelper, ImageHelper>();
             services.AddScoped<IValidator<Category>, CategoryValidator>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IDashboardService, DashboardService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             
